@@ -1,5 +1,6 @@
 package com.queuevet.userapi;
 
+import com.queuevet.userapi.model.Customer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
