@@ -1,8 +1,9 @@
-package com.queuevet.userapi.controller;
+package com.queuevet.user.infrastructure.rest;
 
-import com.queuevet.userapi.model.QueueConsRepository;
-import com.queuevet.userapi.model.QueueConsult;
-import com.queuevet.userapi.service.QueueService;
+import com.queuevet.user.infrastructure.rest.exception.QueueConsultControllerNotFoundException;
+import com.queuevet.user.application.QueueService;
+import com.queuevet.user.model.QueueConsult;
+import com.queuevet.user.model.repository.QueueConsultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public class QueueConsultController {
 
     @Autowired
-    private QueueConsRepository repository;
+    private QueueConsultRepository repository;
 
     @Autowired
     private QueueService queueService;
@@ -25,7 +26,7 @@ public class QueueConsultController {
     }
 
     @PostMapping("/queue")
-    QueueConsult newQueue(@RequestBody QueueConsult newUser) {
+    QueueConsult create(@RequestBody QueueConsult newUser) {
         return queueService.save(newUser);
     }
 
@@ -36,12 +37,11 @@ public class QueueConsultController {
     }
 
     @PutMapping("/queue/{id}")
-    QueueConsult replaceUser(@RequestBody QueueConsult newQueue, @PathVariable Long id) {
+    QueueConsult update(@RequestBody QueueConsult newQueue, @PathVariable Long id) {
         return repository.findById(id)
                 .map(queue -> {
                     queue.setCustomer(newQueue.getCustomer());
                     queue.setVet(newQueue.getVet());
-                    queue.setCurrentDate(newQueue.getCurrentDate());
                     return repository.save(queue);
                 })
                 .orElseGet(() -> {
@@ -51,7 +51,7 @@ public class QueueConsultController {
     }
 
     @DeleteMapping("/queue/{id}")
-    void deleteUser(@PathVariable Long id) {
+    void delete(@PathVariable Long id) {
         repository.deleteById(id);
     }
 

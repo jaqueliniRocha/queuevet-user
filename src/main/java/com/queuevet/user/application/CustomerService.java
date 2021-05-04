@@ -1,7 +1,7 @@
-package com.queuevet.userapi.service;
+package com.queuevet.user.application;
 
-import com.queuevet.userapi.model.Customer;
-import com.queuevet.userapi.model.CustomerRepository;
+import com.queuevet.user.model.Customer;
+import com.queuevet.user.model.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

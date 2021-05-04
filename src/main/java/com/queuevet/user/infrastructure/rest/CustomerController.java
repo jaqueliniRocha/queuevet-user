@@ -1,9 +1,9 @@
-package com.queuevet.userapi.controller;
+package com.queuevet.user.infrastructure.rest;
 
-import com.queuevet.userapi.model.Customer;
-import com.queuevet.userapi.model.CustomerRepository;
-import com.queuevet.userapi.model.User;
-import com.queuevet.userapi.service.CustomerService;
+import com.queuevet.user.infrastructure.rest.exception.CustomerNotFoundException;
+import com.queuevet.user.model.Customer;
+import com.queuevet.user.model.repository.CustomerRepository;
+import com.queuevet.user.application.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +24,7 @@ public class CustomerController {
     }
 
     @PostMapping("/customer")
-    Customer newCustomer(@RequestBody Customer newCostumer){
+    Customer create(@RequestBody Customer newCostumer){
         return customerService.save(newCostumer);
     }
 
@@ -35,13 +35,12 @@ public class CustomerController {
     }
 
     @PutMapping("/customer/{id}")
-    Customer updateCustomer(@RequestBody Customer newCustomer, @PathVariable Long id){
+    Customer update(@RequestBody Customer newCustomer, @PathVariable Long id){
         return repository.findById(id)
                 .map(customer -> {
-                    customer.setNamePet(newCustomer.getNamePet());
+                    customer.setAnimals(newCustomer.getAnimals());
                     customer.setName(newCustomer.getName());
                     customer.setCpf(newCustomer.getCpf());
-                    customer.setConsultationDate((newCustomer.getConsultationDate()));
                     return repository.save(newCustomer);
                 })
                 .orElseGet(() -> {
@@ -51,7 +50,7 @@ public class CustomerController {
     }
 
     @DeleteMapping("/customer/{id}")
-    void deleteCustomer(@PathVariable Long id){
+    void delete(@PathVariable Long id){
         repository.deleteById(id);
     }
 

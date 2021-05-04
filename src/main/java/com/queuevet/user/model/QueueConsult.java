@@ -1,28 +1,30 @@
-package com.queuevet.userapi.model;
+package com.queuevet.user.model;
 
-import org.apache.tomcat.jni.Time;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 public class QueueConsult {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
     @Cascade(CascadeType.ALL)
     private Customer customer;
+
+    @ManyToOne
+    @JoinColumn(name = "vet_id")
+    @Cascade(CascadeType.ALL)
     private Vet vet;
-    private LocalDateTime currentDate;
-    private Time waitingTime;
+
+    private LocalDateTime createdAt;
+
+    private Long waitingTimeInMinutes;
 
     public Long getId() {
         return id;
@@ -48,20 +50,19 @@ public class QueueConsult {
         this.vet = vet;
     }
 
-    public LocalDateTime getCurrentDate() {
-        return currentDate;
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCurrentDate(LocalDateTime currentDate) {
-        this.currentDate = currentDate;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Time getWaitingTime() {
-        return waitingTime;
+    public Long getWaitingTimeInMinutes() {
+        return waitingTimeInMinutes;
     }
 
-    public void setWaitingTime(Time waitingTime) {
-        this.waitingTime = waitingTime;
+    public void setWaitingTimeInMinutes(Long waitingTimeInMinutes) {
+        this.waitingTimeInMinutes = waitingTimeInMinutes;
     }
-
 }

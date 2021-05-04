@@ -1,4 +1,4 @@
-package com.queuevet.userapi.controller;
+package com.queuevet.user.infrastructure.rest.exception;
 
 public class UserNotFoundException extends RuntimeException {
 	

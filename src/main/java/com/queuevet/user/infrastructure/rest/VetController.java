@@ -1,11 +1,10 @@
-package com.queuevet.userapi.controller;
+package com.queuevet.user.infrastructure.rest;
 
 
 
-import com.queuevet.userapi.model.Customer;
-import com.queuevet.userapi.model.Vet;
-import com.queuevet.userapi.model.VetRepository;
-import com.queuevet.userapi.service.VetService;
+import com.queuevet.user.model.Vet;
+import com.queuevet.user.model.repository.VetRepository;
+import com.queuevet.user.application.VetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +26,7 @@ public class VetController {
     }
 
     @PostMapping("/vet")
-    Vet newVet(@RequestBody Vet newVet){
+    Vet create(@RequestBody Vet newVet){
         return vetService.save(newVet);
     }
 
@@ -38,7 +37,7 @@ public class VetController {
     }
 
     @PutMapping("/vet/{id}")
-    Vet updateVet(@RequestBody Vet newVet, @PathVariable Long id){
+    Vet update(@RequestBody Vet newVet, @PathVariable Long id){
         return repository.findById(id)
                 .map(vet -> {
                     vet.setName(newVet.getName());
@@ -52,7 +51,7 @@ public class VetController {
     }
 
     @DeleteMapping("/vet/{id}")
-    void deleteVet(@PathVariable Long id){
+    void delete(@PathVariable Long id){
         repository.deleteById(id);
     }
 

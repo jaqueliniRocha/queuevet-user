@@ -1,10 +1,10 @@
-package com.queuevet.userapi.service;
+package com.queuevet.user.application;
 
-import com.queuevet.userapi.model.User;
+import com.queuevet.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.queuevet.userapi.model.UserRepository;
+import com.queuevet.user.model.repository.UserRepository;
 
 @Service
 public class UserService {

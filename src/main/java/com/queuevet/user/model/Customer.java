@@ -1,29 +1,31 @@
-package com.queuevet.userapi.model;
+package com.queuevet.user.model;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
 public class Customer {
 
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
-    private String namePet;
+
+    @OneToMany
+    @JoinColumn(name = "customer_id")
+    @Cascade(CascadeType.ALL)
+    private Collection<Animal> animals;
+
     private String cpf;
 
     @OneToOne
     @Cascade(CascadeType.ALL)
     private User user;
-    private Date consultationDate;
 
     public Long getId() {
         return id;
@@ -41,12 +43,12 @@ public class Customer {
         this.name = name;
     }
 
-    public String getNamePet() {
-        return namePet;
+    public Collection<Animal> getAnimals() {
+        return animals;
     }
 
-    public void setNamePet(String namePet) {
-        this.namePet = namePet;
+    public void setAnimals(Collection<Animal> animals) {
+        this.animals = animals;
     }
 
     public String getCpf() {
@@ -64,12 +66,5 @@ public class Customer {
     public void setUser(User user) {
         this.user = user;
     }
-
-    public Date getConsultationDate() {
-        return consultationDate;
-    }
-
-    public void setConsultationDate(Date consultationDate) {
-        this.consultationDate = consultationDate;
-    }
 }
+

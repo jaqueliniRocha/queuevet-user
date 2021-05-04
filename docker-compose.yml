@@ -1,0 +1,7 @@
+mysql:
+  image: mysql:8.0.24
+  environment:
+    MYSQL_DATABASE: queuevet
+    MYSQL_ROOT_PASSWORD: root
+  ports:
+    - 3306:3306

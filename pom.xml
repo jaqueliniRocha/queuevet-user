@@ -8,11 +8,10 @@
 		<version>2.4.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.jjcompany</groupId>
-	<artifactId>user-api</artifactId>
+	<groupId>com.queuvet</groupId>
+	<artifactId>queuevet-user</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-api</name>
-	<description>Demo project for Spring Boot</description>
+	<name>queuevet-user</name>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -26,6 +25,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-java8</artifactId>
+			<version>5.4.31.Final</version>
 		</dependency>
 
 		<dependency>

@@ -1,9 +1,10 @@
-package com.queuevet.userapi.controller;
+package com.queuevet.user.infrastructure.rest;
 
 import java.util.List;
 
-import com.queuevet.userapi.model.User;
-import com.queuevet.userapi.service.UserService;
+import com.queuevet.user.infrastructure.rest.exception.UserNotFoundException;
+import com.queuevet.user.application.UserService;
+import com.queuevet.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.queuevet.userapi.model.UserRepository;
+import com.queuevet.user.model.repository.UserRepository;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    User newUser(@RequestBody User newUser) {
+    User create(@RequestBody User newUser) {
         return userService.save(newUser);
     }
 
@@ -45,7 +46,7 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}")
-    User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
+    User update(@RequestBody User newUser, @PathVariable Long id) {
         return repository.findById(id)
                 .map(user -> {
                     user.setEmail(newUser.getEmail());
@@ -59,7 +60,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    void deleteUser(@PathVariable Long id) {
+    void delete(@PathVariable Long id) {
         repository.deleteById(id);
     }
 

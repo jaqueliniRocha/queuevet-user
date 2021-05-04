@@ -1,14 +1,13 @@
-package com.queuevet.userapi;
+package com.queuevet.user;
 
-import com.queuevet.userapi.model.Customer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class UserApiApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(UserApiApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
